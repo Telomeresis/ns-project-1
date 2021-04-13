@@ -1,0 +1,27 @@
+# Step 1: Loading Provided Faculty Details
+- Data is loaded from the provided Faculty.xlsx file into a DF for later use
+- The relevant columns are then selected for use. Irrelevant columns are then discarded.
+
+# Step 2: Scraping DBLP HTML
+- The previously created Faculty DF is then proceeded to create a list of .xml hyperlinks for web-scraping.
+- Web scraping is then performed using requests.
+
+# Step 3: Parsing DBLP HTML w/ BS4
+- BS4 is then used for parsing the previously scraped data from DBLP, by extracting all related articles and journals.
+- We also use the Faculty DF data to retrieve the DBLP names of all Faculty staff - as the provided names and DBLP names are not the same.
+
+# Step 4: Dataframe Creation & Population w/ Parsed DBLP Data
+- A dataframe is created to store the resultant pre-processed scraped output.
+- We iterate through the previously scraped article and journal data using BS4 for each faculty staff.
+- At each iteration, we store the relevant information in the dataframe.
+- We then use a dict_mapping with the previously made Faculty DF to map all journal/article entries with each Faculty staff's name.
+
+# Step 5: Dataframe Post-Processing (NLP & Metrics)
+- Using the previously created output DF, we use NLP to identify and map each Faculty staff to each journal/conference publication accurately.
+- This is because some of the publication name credits are not the same as the provided names in the Faculty DF, or even in the DBLP data records.
+- After this mapping is done, we identify the author crediting index using a metric called "Contribution Index".
+- This Contribution Index is used to identify the authorship weight of the Faculty Staff relative to his/her publication (E.g. 1 = First Billing; Main Author. 2 = Second Billing, Co-Author, etc)
+- We then separate the Faculty Staff from the other Author authors in order to prepare the dataframe for use with creation of the Graph Network later on.
+
+# Step 6: Dataframe to CSV Output
+- The relevant columns are selected, and then the resultant DF is output as a CSV for creaton of the Faculty Collaboration Graph Network.
