@@ -201,14 +201,12 @@ def prune_name_from_other_authors_list(fac_name, authors_list, dblp_df):
 dblp_df.apply(lambda row: prune_name_from_other_authors_list(row["Faculty"], row["Other Authors"], dblp_df), axis = 1)
 print('Step 5 Completed\n')
 
-'''
-# Step 6: Output
+# Step 5.5: Output
 # Store dblp_df with pickle
 dblp_df.to_csv(r'dblp_df_2.csv', index = False)
 with open('dblp_12k_processed_df.pkl', 'wb') as f:
     pickle.dump(dblp_df, f)
-print('Step 6 Completed: Output Complete\n')
-'''
+print('Step 5.5 Completed: Output Complete\n')
 
 # Step 6: Retrieve unique, non-SCSE authors with distinguishable names
 def filter_unique_authors(dblp_df):
@@ -291,6 +289,7 @@ def retrieve_thousand_faculty(dblp_df):
 
     return sourav_pal_list + random_chosen_list
 thousand_apostles_list = retrieve_thousand_faculty(dblp_df)
+print(len(thousand_apostles_list))
 print('Step 7 Completed\n')
 
 # Step 8: Store thousand faculty members with pickle
